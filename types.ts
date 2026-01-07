@@ -22,3 +22,18 @@ export interface GeneratedCaption {
   description: string;
   hashtags: string[];
 }
+
+export interface BotSettings {
+  botToken: string;
+  apiId: string;
+  apiHash: string;
+  targetChannel: string;
+  autoReplyEnabled: boolean;
+}
+
+export interface TerminalLog {
+  id: string;
+  message: string;
+  type: 'info' | 'error' | 'success' | 'ai';
+  time: string;
+}

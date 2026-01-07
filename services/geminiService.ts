@@ -4,6 +4,9 @@ import { GeneratedCaption } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
+/**
+ * Generates professional movie metadata and captions in Uzbek.
+ */
 export async function generateMovieCaption(movieTitle: string): Promise<GeneratedCaption | null> {
   try {
     const response = await ai.models.generateContent({
@@ -35,5 +38,25 @@ export async function generateMovieCaption(movieTitle: string): Promise<Generate
   } catch (error) {
     console.error("Gemini Generation Error:", error);
     return null;
+  }
+}
+
+/**
+ * Generates a helpful AI response for user messages in the movie bot.
+ */
+export async function generateAutoReply(userMessage: string): Promise<string> {
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: userMessage,
+      config: {
+        systemInstruction: "Siz Telegram kino kanalining AI yordamchisiz. Foydalanuvchi savollariga (kino so'rovlari, yordam, minnatdorchilik) juda xushmuomala va do'stona o'zbek tilida javob bering. Javobingiz qisqa va aniq bo'lsin.",
+        temperature: 0.7,
+      }
+    });
+    return response.text || "Kechirasiz, hozir javob bera olmayman.";
+  } catch (error) {
+    console.error("Auto-reply Error:", error);
+    return "Bot hozirda biroz band. Keyinroq urinib ko'ring.";
   }
 }

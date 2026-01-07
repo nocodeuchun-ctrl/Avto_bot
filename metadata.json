@@ -1,5 +1,5 @@
 {
-  "name": "KinoKopir Dashboard",
+  "name": "Kinocode Dashboard",
   "description": "A sophisticated management dashboard for Telegram movie bot automation, featuring AI-powered metadata generation and channel monitoring simulation.",
   "requestFramePermissions": [
     "camera",
